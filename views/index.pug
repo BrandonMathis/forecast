@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Forecast Slack Bot
+    link(rel="stylesheet" href="/styles/main.css" type="text/css")
+    link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,300")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="icon" type="image/png" href="/icons/black/png/16x16/mostlysunny.png")
+  body
+    .container.container--center
+      .logo
+        include ../public/icons/white/svg/partlycloudy.svg
+      h1 Forecast
+      .blurb A weather bot for Slack
+      .directions
+        .step
+          a(href="https://slack.com/oauth/authorize?scope=bot&client_id=2344923841.105084115094")
+            .add-to-slack
+              img(alt="Add to Slack" height="50" src="/icons/slack_icon.png")
+              .text
+                | Add to Slack
+        .line
+          include ../public/icons/line.svg
+        .step
+          .screenshot
+            img(src="/icons/message.png").slack
+        .line
+          include ../public/icons/line.svg
+        .step
+          .screenshot
+            img(src="/icons/response.png").slack
+      footer
+        p
+          a(href="https://darksky.net/poweredby/")
+            | Powered by DarkSky.
+        p
+          a(href="http://www.ajager.com/#/weather-underground/")
+            | Weather icons designed by Ashley Jager.

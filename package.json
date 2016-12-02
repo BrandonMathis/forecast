@@ -1,0 +1,52 @@
+{
+  "name": "forecast",
+  "version": "1.0.0",
+  "description": "A weather bot for slack",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon --watch app --watch main.js",
+    "start-prod": "NODE_ENV=production nodemon --watch app --watch main.js",
+    "lint": "eslint --ext .js .",
+    "remove-bots": "node ./utils/removeBots.js",
+    "test": "mocha ./app/**/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/BrandonMathis/forecast.git"
+  },
+  "keywords": [
+    "weather",
+    "dark sky",
+    "forecast",
+    "bot",
+    "slack"
+  ],
+  "author": "Brandon Mathis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BrandonMathis/forecast/issues"
+  },
+  "homepage": "https://github.com/BrandonMathis/forecast#readme",
+  "dependencies": {
+    "@slack/client": "^3.6.1",
+    "babel-eslint": "^7.1.0",
+    "chai": "^3.5.0",
+    "cron": "^1.1.1",
+    "dotenv": "^2.0.0",
+    "eslint": "^3.10.0",
+    "express": "^4.14.0",
+    "lodash": "^4.16.6",
+    "mocha": "^3.1.2",
+    "moment": "^2.16.0",
+    "mongoose": "^4.6.7",
+    "morgan": "^1.7.0",
+    "nock": "^9.0.2",
+    "node-sass-middleware": "^0.10.0",
+    "nodemon": "^1.11.0",
+    "passport-slack": "0.0.6",
+    "pug": "^2.0.0-beta6",
+    "request": "^2.78.0",
+    "sinon": "^1.17.6",
+    "slackbots": "^0.5.3"
+  }
+}
