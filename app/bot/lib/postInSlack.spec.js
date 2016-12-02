@@ -74,7 +74,7 @@ describe('postInSlack', () => {
             },
             {
               "color": "#008000",
-              "footer": "📍 Raleigh, NC, US. @ me with any location",
+              "footer": "📍 Raleigh, NC, US. @ me with any location. http://forecastslackbot.com",
               "text": "Rain throughout the day. High 83° F. Chance of rain 76%.",
               "thumb_url": iconFor('rain'),
               "title": "Saturday (H: 83 L: 55)",
