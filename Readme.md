@@ -1,3 +1,19 @@
-<img src="https://raw.githubusercontent.com/BrandonMathis/forecast/master/public/icons/forecast_github_logo.png"/>
+<img src="https://raw.githubusercontent.com/BrandonMathis/forecast/master/public/icons/forecast_github_logo.png"/>  
+🌤 A weather bot for Slack 🌤
 
 # Forecast
+A weather bot for slack powered by [DarkSky](https://darksky.net/forecast/40.7127,-74.0059/us12/en).
+
+[Add this bot to your Slack here!](http://forecastslackbot.com)
+
+## Install
+
+```
+npm install
+```
+
+## Start
+
+```
+npm start
+```
