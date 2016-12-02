@@ -32,14 +32,10 @@ module.exports = function(bot) {
     }
   });
 
-  rtm.on(RTM_EVENTS.SUBTEAM_SELF_REMOVED, (message) => {
-    console.log(message);
-  });
-
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
-    console.log(message);
     if (message.text && message.text.match(RegExp(rtm.activeUserId))) {
       const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
+      console.log(`🌤 Weather Requested for ${location}`);
       respondWithWeather(web, location, message.channel);
     }
   });
