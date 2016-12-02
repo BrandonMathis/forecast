@@ -1,3 +1,3 @@
-<img src="https://raw.githubusercontent.com/BrandonMathis/forecast/master/public/icons/black/png/128x128/mostlysunny.png"/>
+<img src="https://raw.githubusercontent.com/BrandonMathis/forecast/master/public/icons/forecast_github_logo.png"/>
 
 # Forecast
