@@ -35,7 +35,7 @@ module.exports = function(bot) {
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if (message.text && message.text.match(RegExp(rtm.activeUserId))) {
       if (message.text.match(/help/)) {
-        rtm.sendMessage("Just @ me with any location in the world! (ie: @forecast durham)");
+        rtm.sendMessage("Just @ me with any location in the world! (ie: @forecast durham)", message.channel);
       } else {
         const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
         console.log(`🤖  Weather Requested for ${location}`);
