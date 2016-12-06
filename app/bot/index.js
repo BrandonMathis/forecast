@@ -43,7 +43,7 @@ module.exports = function(bot) {
           'Antarctica',
           '90210'
         ]);
-        rtm.sendMessage("Just @ me with any location in the world! (ie: @forecast Paris, France)", message.channel);
+        rtm.sendMessage(`Just @ me with any location in the world! (ie: @forecast ${exampleLocation})`, message.channel);
       } else {
         const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
         console.log(`🤖  Weather Requested for ${location}`);
