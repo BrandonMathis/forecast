@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const getLocation = require('./lib/getLocation');
 const weatherFor = require('./lib/weatherFor');
 const postInSlack = require('./lib/postInSlack');
@@ -34,8 +35,15 @@ module.exports = function(bot) {
 
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if (message.text && message.text.match(RegExp(rtm.activeUserId))) {
-      if (message.text.match(/help/)) {
-        rtm.sendMessage("Just @ me with any location in the world! (ie: @forecast durham)", message.channel);
+      if (message.text.match(/help\s*$/)) {
+        const exampleLocation = _.sample([
+          'Paris, France',
+          'Tokyo',
+          'Durham',
+          'Antarctica',
+          '90210'
+        ]);
+        rtm.sendMessage("Just @ me with any location in the world! (ie: @forecast Paris, France)", message.channel);
       } else {
         const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
         console.log(`🤖  Weather Requested for ${location}`);
