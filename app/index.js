@@ -38,6 +38,9 @@ app.get('/success', (req, res) => {
 app.get('/error', (req, res) => {
   res.render('error');
 });
+app.get('/help', (req, res) => {
+  res.render('help');
+});
 
 app.get('/auth/slack/callback', (req, res) => {
   const data = {

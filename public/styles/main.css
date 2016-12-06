@@ -461,6 +461,11 @@ footer {
   margin-top: 20px;
 }
 
+footer li {
+  margin-top: 5px;
+  list-style-type: none;
+}
+
 .add-response a {
   color: white;
   text-decoration: underline;
