@@ -17,7 +17,7 @@ function respondWithWeather(web, location, channel) {
       postInSlack(web, channel, weather);
     })
     .catch(() => {
-      postMessage(web, channel, `Could not find weather for ${location}`, { as_user: true })
+      postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "@forecast help" if you need help!`, { as_user: true })
     });
 }
 
