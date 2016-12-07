@@ -34,8 +34,9 @@ module.exports = function(bot) {
   });
 
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
-    if (message.text && message.text.match(RegExp(rtm.activeUserId))) {
-      if (message.text.match(/help\s*$/)) {
+    const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
+    if (message.user != rtm.activeUserId && message.text && message.text.match(RegExp(rtm.activeUserId))) {
+      if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
         const exampleLocation = _.sample([
           'Paris, France',
           'Tokyo',
@@ -45,7 +46,6 @@ module.exports = function(bot) {
         ]);
         rtm.sendMessage(`Just @ me with any location in the world! (ie: @forecast ${exampleLocation})`, message.channel);
       } else {
-        const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
         console.log(`🤖  Weather Requested for ${location}`);
         respondWithWeather(web, location, message.channel);
       }
