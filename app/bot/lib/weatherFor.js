@@ -2,7 +2,6 @@ require('dotenv').config();
 const request = require('request');
 const moment = require('moment');
 const iconFor = require('./iconFor');
-const formatTemp = require('./formatTemp');
 
 function degToCompass(num) {
   const val = Math.floor((num / 22.5) + 0.5);
@@ -40,7 +39,7 @@ function weatherFor(lat, lng, location, units = 'us') {
       }
       const current = {
         temp_f: temp,
-        tempString: formatTemp(temp),
+        tempString: `${temp}° ${degreesUnit}`,
         lat: lat,
         lng: lng,
         description: json.currently.summary,

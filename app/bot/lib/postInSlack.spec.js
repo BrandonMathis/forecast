@@ -2,7 +2,6 @@ const expect = require('chai').expect;
 const sinon = require('sinon');
 const postInSlack = require('./postInSlack');
 const weatherFor = require('./weatherFor');
-const formatTemp = require('./formatTemp');
 const iconFor = require('./iconFor');
 const SlackWebClient = require('./slackWebClient');
 const nock = require('nock');
@@ -43,7 +42,7 @@ describe('postInSlack', () => {
                 {
                   "short": true,
                   "title": "Feels Like",
-                  "value": formatTemp('56'),
+                  "value": '56° F',
                 },
                 {
                   "short": true,
@@ -53,11 +52,11 @@ describe('postInSlack', () => {
                 {
                   "short": true,
                   "title": "Dewpoint",
-                  "value": formatTemp('45'),
+                  "value": '45° F',
                 }
               ],
               "thumb_url": iconFor('clear-day'),
-              "title": `It's ${formatTemp('56')} Clear in Raleigh, NC, US`,
+              "title": `It's 56° F Clear in Raleigh, NC, US`,
               "title_link": "https://darksky.net/37.8267,-122.4233",
             },
             {

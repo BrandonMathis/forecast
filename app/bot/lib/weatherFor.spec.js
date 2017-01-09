@@ -6,10 +6,6 @@ const mockWeatherFor = require('../../../support/mockWeatherFor');
 const mockBadWeatherFor = require('../../../support/mockBadWeatherFor');
 const iconFor = require('./iconFor');
 
-function formatTemp(temp) {
-  return `${temp}° F`;
-}
-
 describe('weatherFor', () => {
   context('with good response', () => {
     beforeEach(() => {
@@ -22,7 +18,7 @@ describe('weatherFor', () => {
         .then((weather) => {
           expect(weather.location).to.eq('Raleigh, NC, USA');
           expect(weather.current.temp_f).to.eq(56);
-          expect(weather.current.tempString).to.eq(formatTemp('56'));
+          expect(weather.current.tempString).to.eq('56° F');
           expect(weather.current.description).to.eq('Clear');
           expect(weather.current.lat).to.eq('37.8267');
           expect(weather.current.lng).to.eq('-122.4233');

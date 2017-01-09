@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const botSchema = new Schema({
   slackID: String,
+  unit: String,
   accessToken: String
 });
 

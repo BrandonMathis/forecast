@@ -44,14 +44,29 @@ module.exports = function(bot) {
           'Antarctica',
           '90210'
         ]);
-        rtm.sendMessage(`Just @ me with any location in the world! (ie: @forecast ${exampleLocation})`, message.channel);
+        rtm.sendMessage(`
+*Get Weather*  
+> \`@forecast ${exampleLocation}\` to get weather for location (try any place in the world!)  
+*Settings*  
+> \`@forecast set si\` to change units (\`si\` for metric, \`us\` for imperial)  
+`, message.channel);
+      } else if (message.text.match(/set\s*/)) {
+        unit = message.text.match(/set\s*([\w]*)$/)[1];
+        if(_.includes(['si', 'us'], unit.toLowerCase())) {
+          bot.unit = unit;
+          console.log(`Setting bot unit to ${unit}`);
+          bot.save();
+          rtm.sendMessage(`Your preferred units have been set to ${unit}`, message.channel);
+        }
       } else {
         console.log(`🤖  Weather Requested for ${location}`);
-        let units = 'us';
+        let units;
         if (message.text.match(/!([\w]*)/)) {
-          units = message.text.match(/!([\w]*)/)[1].toLowerCase();
+          units = message.text.match(/!([\w]*)/)[1];
+        } else {
+          units = bot.unit || 'us';
         }
-        respondWithWeather(web, location, message.channel, units);
+        respondWithWeather(web, location, message.channel, units.toLowerCase());
       }
     }
   });
