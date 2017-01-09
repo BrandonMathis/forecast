@@ -36,6 +36,9 @@ module.exports = function(bot) {
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     const location = message.text.replace(`<@${rtm.activeUserId}>`, '').replace(/![\w]*/, '');
     if (message.user != rtm.activeUserId && message.text && message.text.match(RegExp(rtm.activeUserId))) {
+      //
+      // @forecast help
+      //
       if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
         const exampleLocation = _.sample([
           'Paris, France',
@@ -51,6 +54,9 @@ module.exports = function(bot) {
 *Settings*  
 > \`@forecast set si\` to change units (\`si\` for metric, \`us\` for imperial)  
 `, message.channel);
+      //
+      // @forecast set <unit>
+      //
       } else if (message.text.match(/set\s*/)) {
         unit = message.text.match(/set\s*([\w]*)$/)[1];
         if(_.includes(['si', 'us'], unit.toLowerCase())) {
@@ -59,6 +65,9 @@ module.exports = function(bot) {
           bot.save();
           rtm.sendMessage(`Your preferred units have been set to ${unit}`, message.channel);
         }
+      //
+      // @forecast <Location>
+      //
       } else {
         console.log(`🤖  Weather Requested for ${location}`);
         let units;
