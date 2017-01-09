@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const getLocation = require('./lib/getLocation');
+const getTimeZone = require('./lib/getTimeZone');
 const weatherFor = require('./lib/weatherFor');
 const postInSlack = require('./lib/postInSlack');
 const RtmClient = require('@slack/client').RtmClient;
@@ -11,6 +12,7 @@ const postMessage = require('./lib/slackWebClient').postMessage;
 function respondWithWeather(web, location, channel, units) {
   getLocation(location)
     .then((coords) => {
+      getTimeZone(coords.lat, coords.lng);
       return weatherFor(coords.lat, coords.lng, coords.location, units);
     })
     .then((weather) => {
