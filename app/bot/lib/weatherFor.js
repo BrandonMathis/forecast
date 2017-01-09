@@ -10,11 +10,11 @@ function degToCompass(num) {
   return arr[(val % 16)];
 }
 
-function weatherFor(lat, lng, location) {
+function weatherFor(lat, lng, location, units = 'us') {
   const token = process.env.WEATHER_TOKEN;
 
   return new Promise((resolve, reject) => {
-    const weatherURL = `https://api.darksky.net/forecast/${token}/${lat},${lng}?exclude=[minutely,hourly]`;
+    const weatherURL = `https://api.darksky.net/forecast/${token}/${lat},${lng}?exclude=[minutely,hourly]&units=${units}`;
     request(weatherURL, (error, res, body) => {
       if(error) { return reject(error); }
       let json
@@ -27,6 +27,17 @@ function weatherFor(lat, lng, location) {
       const lat = json.latitude.toString();
       const lng = json.longitude.toString();
       const temp = parseInt(json.currently.temperature);
+      let speedUnit;
+      let degreesUnit;
+      if(units.toLowerCase() === 'si') {
+        speedUnit = 'KPH';
+        degreesUnit = 'C';
+        precipUnit = 'mm';
+      } else {
+        speedUnit = 'MPH';
+        degreesUnit = 'F';
+        precipUnit = 'in';
+      }
       const current = {
         temp_f: temp,
         tempString: formatTemp(temp),
@@ -34,10 +45,10 @@ function weatherFor(lat, lng, location) {
         lng: lng,
         description: json.currently.summary,
         icon: iconFor(json.currently.icon),
-        windString: `From the ${degToCompass(json.currently.windSpeed)} at ${json.currently.windSpeed} MPH`,
-        feelsLike: `${parseInt(json.currently.apparentTemperature)}° F`,
-        precip1hr: `${json.currently.precipIntensity} in`,
-        dewpointString: `${parseInt(json.currently.dewPoint)}° F`,
+        windString: `From the ${degToCompass(json.currently.windSpeed)} at ${json.currently.windSpeed} ${speedUnit}`,
+        feelsLike: `${parseInt(json.currently.apparentTemperature)}° ${degreesUnit}`,
+        precip1hr: `${json.currently.precipIntensity} ${precipUnit}`,
+        dewpointString: `${parseInt(json.currently.dewPoint)}° ${degreesUnit}`,
         darkSkyLink: `https://darksky.net/${lat},${lng}`
       };
       const forecast = json.daily.data.slice(1, 4).map((day) => {

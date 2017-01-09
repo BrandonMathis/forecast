@@ -12,12 +12,12 @@ function forecastSlackJson(forecast) {
 
   let lowText = '';
   if (low < 50) {
-    lowText = ` Low ${low}° F.`;
+    lowText = ` Low ${low}°.`;
   }
 
   let highText = '';
   if (high > 80) {
-    highText = ` High ${high}° F.`;
+    highText = ` High ${high}°.`;
   }
   return {
     color,

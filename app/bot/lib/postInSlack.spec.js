@@ -62,20 +62,20 @@ describe('postInSlack', () => {
             },
             {
               "color": "#008B8B",
-              "text": "Partly cloudy overnight. Low 46° F.",
+              "text": "Partly cloudy overnight. Low 46°.",
               "thumb_url": iconFor('partly-cloudy-night'),
               "title": "Thursday (H: 62 L: 46)",
             },
             {
               "color": "#008B8B",
-              "text": "Partly cloudy in the morning. Low 48° F.",
+              "text": "Partly cloudy in the morning. Low 48°.",
               "thumb_url": iconFor('partly-cloudy-night'),
               "title": "Friday (H: 64 L: 48)",
             },
             {
               "color": "#008000",
               "footer": "📍 Raleigh, NC, US. @ me with any location. http://forecastslackbot.com",
-              "text": "Rain throughout the day. High 83° F. Chance of rain 76%.",
+              "text": "Rain throughout the day. High 83°. Chance of rain 76%.",
               "thumb_url": iconFor('rain'),
               "title": "Saturday (H: 83 L: 55)",
             },

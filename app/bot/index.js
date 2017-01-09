@@ -8,10 +8,10 @@ const RTM_EVENTS = require('@slack/client').RTM_EVENTS;
 const CLIENT_EVENTS = require('@slack/client').CLIENT_EVENTS;
 const postMessage = require('./lib/slackWebClient').postMessage;
 
-function respondWithWeather(web, location, channel) {
+function respondWithWeather(web, location, channel, units) {
   getLocation(location)
     .then((coords) => {
-      return weatherFor(coords.lat, coords.lng, coords.location);
+      return weatherFor(coords.lat, coords.lng, coords.location, units);
     })
     .then((weather) => {
       postInSlack(web, channel, weather);
@@ -34,7 +34,7 @@ module.exports = function(bot) {
   });
 
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
-    const location = message.text.replace(`<@${rtm.activeUserId}>`, '');
+    const location = message.text.replace(`<@${rtm.activeUserId}>`, '').replace(/![\w]*/, '');
     if (message.user != rtm.activeUserId && message.text && message.text.match(RegExp(rtm.activeUserId))) {
       if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
         const exampleLocation = _.sample([
@@ -47,7 +47,11 @@ module.exports = function(bot) {
         rtm.sendMessage(`Just @ me with any location in the world! (ie: @forecast ${exampleLocation})`, message.channel);
       } else {
         console.log(`🤖  Weather Requested for ${location}`);
-        respondWithWeather(web, location, message.channel);
+        let units = 'us';
+        if (message.text.match(/!([\w]*)/)) {
+          units = message.text.match(/!([\w]*)/)[1].toLowerCase();
+        }
+        respondWithWeather(web, location, message.channel, units);
       }
     }
   });
