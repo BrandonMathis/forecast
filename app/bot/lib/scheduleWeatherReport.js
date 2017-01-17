@@ -15,7 +15,6 @@ module.exports = function(token, location, message, units) {
         token: token,
         channel: message.channel,
         location: location.trim(),
-        units: units,
         cron: {
           enabled: true,
           startAt: new Date(),

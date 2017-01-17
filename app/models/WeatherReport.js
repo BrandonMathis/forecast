@@ -6,13 +6,12 @@ const postMessage = require('../bot/lib/slackWebClient').postMessage;
 const postInSlack = require('../bot/lib/postInSlack');
 const weatherFor = require('../bot/lib/weatherFor');
 const WebClient = require('@slack/client').WebClient;
+const Bot = require('./bot.js');
 
 const weatherReportSchema = new Schema({
   location: String,
   token: String,
   channel: String,
-  units: String,
-  bot: { type: Number, ref: 'Bot' }
 });
 
 weatherReportSchema.plugin(cronPlugin, {
@@ -20,11 +19,15 @@ weatherReportSchema.plugin(cronPlugin, {
     const location = jobInfo.location;
     const channel = jobInfo.channel;
     const token = jobInfo.token;
-    const units = jobInfo.units;
     const web = new WebClient(token);
-    getLocation(location)
-      .then((coords) => {
-        return weatherFor(coords.lat, coords.lng, coords.location, units);
+    Promise.all([
+      Bot.find({accessToken: token}),
+      getLocation(location)
+    ])
+      .then((values) => {
+        const bot = values[0][0];
+        const coords = values[1];
+        return weatherFor(coords.lat, coords.lng, coords.location, bot.units);
       })
       .then((weather) => {
         console.log(`Reporting Weather For ${jobInfo.location}`);

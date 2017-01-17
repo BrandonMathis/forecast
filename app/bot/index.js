@@ -48,12 +48,12 @@ function helpMessage(bot, rtm, message) {
 }
 
 function setUnits(bot, rtm, message) {
-  unit = message.text.match(/set\s*([\w]*)$/)[1];
-  if(_.includes(['si', 'us'], unit.toLowerCase())) {
-    bot.unit = unit;
-    console.log(`Setting bot unit to ${unit}`);
+  units = message.text.match(/set\s*([\w]*)$/)[1];
+  if(_.includes(['si', 'us'], units.toLowerCase())) {
+    bot.units = units;
+    console.log(`Setting bot units to ${units}`);
     bot.save();
-    rtm.sendMessage(`Your preferred units have been set to *${unit}*`, message.channel);
+    rtm.sendMessage(`Your preferred units have been set to *${units}*`, message.channel);
   }
 }
 
