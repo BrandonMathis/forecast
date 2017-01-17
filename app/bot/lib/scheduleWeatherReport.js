@@ -18,8 +18,7 @@ module.exports = function(token, location, message, units) {
         cron: {
           enabled: true,
           startAt: new Date(),
-          // interval: `0 0 ${hour} * * *`
-          interval: `* * * * * *`
+          interval: `0 0 ${hour} * * *`
         }
       });
     });
