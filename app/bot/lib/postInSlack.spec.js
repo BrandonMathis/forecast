@@ -33,6 +33,7 @@ describe('postInSlack', () => {
           attachments: [
             {
               "color": "#008B8B",
+              "fallback": "It's 56° F Clear in Raleigh, NC, US",
               "fields": [
                 {
                   "short": true,
@@ -61,18 +62,21 @@ describe('postInSlack', () => {
             },
             {
               "color": "#008B8B",
+              "fallback": "Thursday (H: 62 L: 46)",
               "text": "Partly cloudy overnight. Low 46°.",
               "thumb_url": iconFor('partly-cloudy-night'),
               "title": "Thursday (H: 62 L: 46)",
             },
             {
               "color": "#008B8B",
+              "fallback": "Friday (H: 64 L: 48)",
               "text": "Partly cloudy in the morning. Low 48°.",
               "thumb_url": iconFor('partly-cloudy-night'),
               "title": "Friday (H: 64 L: 48)",
             },
             {
               "color": "#008000",
+              "fallback": "Saturday (H: 83 L: 55)",
               "footer": "📍 Raleigh, NC, US. @ me with any location. http://forecastslackbot.com",
               "text": "Rain throughout the day. High 83°. Chance of rain 76%.",
               "thumb_url": iconFor('rain'),

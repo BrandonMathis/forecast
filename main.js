@@ -2,6 +2,7 @@ const app = require('./app');
 const activateBot = require('./app/bot');
 const mongoose = require('mongoose');
 const Bot = require('./app/models/bot');
+const WeatherReport = require('./app/models/WeatherReport');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('localhost', 'forecast');
@@ -11,6 +12,8 @@ Bot.find({}, (err, bots) => {
     activateBot(bot);
   });
 });
+
+WeatherReport.createCron().start();
 
 app.listen(3000, () => {
   console.log("🌤  Forecast is up and running 🌤:");

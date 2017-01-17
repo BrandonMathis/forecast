@@ -3,6 +3,7 @@ const getLocation = require('./lib/getLocation');
 const getTimeZone = require('./lib/getTimeZone');
 const weatherFor = require('./lib/weatherFor');
 const postInSlack = require('./lib/postInSlack');
+const scheduleWeatherReport = require('./lib/scheduleWeatherReport');
 const RtmClient = require('@slack/client').RtmClient;
 const WebClient = require('@slack/client').WebClient;
 const RTM_EVENTS = require('@slack/client').RTM_EVENTS;
@@ -19,7 +20,6 @@ function respondWithWeather(bot, web, location, message) {
   }
   getLocation(location)
     .then((coords) => {
-      getTimeZone(coords.lat, coords.lng);
       return weatherFor(coords.lat, coords.lng, coords.location, units);
     })
     .then((weather) => {
@@ -82,6 +82,11 @@ module.exports = function(bot) {
       //
       } else if (message.text.match(/set\s*/)) {
         setUnits(bot, rtm, message);
+      //
+      // @forecast schedule <location>
+      //
+      } else if(message.text.match(/schedule\s*/)) {
+        scheduleWeatherReport(token, location.replace('schedule', ''), message, bot.units);
       //
       // @forecast <Location>
       //

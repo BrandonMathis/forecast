@@ -22,6 +22,7 @@ function forecastSlackJson(forecast) {
   return {
     color,
     title: forecast.title,
+    fallback: forecast.title,
     text: forecast.text + highText + lowText + chanceOfRain,
     thumb_url: forecast.thumb_url
   };
