@@ -1,6 +1,6 @@
 require('dotenv').config();
 const request = require('request');
-const moment = require('moment');
+const moment = require('moment-timezone');
 const iconFor = require('./iconFor');
 
 function degToCompass(num) {
