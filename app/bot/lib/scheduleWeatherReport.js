@@ -9,7 +9,9 @@ module.exports = function(token, location, message, units) {
       return getTimeZone(coords.lat, coords.lng)
     })
     .then((timeZone) => {
-      const hour = moment('8', 'H').tz(timeZone).utc().format("H");
+      const localTime = moment('8', 'H').tz(timeZone)
+      console.log(localTime);
+      const utcHour = localTime.utc().format("H");
       const channel = message.channel;
       WeatherReport.create({
         token: token,
@@ -18,7 +20,7 @@ module.exports = function(token, location, message, units) {
         cron: {
           enabled: true,
           startAt: new Date(),
-          interval: `0 0 ${hour} * * *`
+          interval: `0 0 ${utcHour} * * *`
         }
       });
     });
