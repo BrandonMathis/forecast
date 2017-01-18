@@ -11,6 +11,7 @@ Bot.find({}, (err, bots) => {
   for (var start = 0; start < bots.length; start++) {
     const bot = bots[start];
     setTimeout(function() {
+      console.log(`Starting bot ${bot.slackID}`)
       activateBot(bot);
     }, 1500 * (start + 1));
   }
