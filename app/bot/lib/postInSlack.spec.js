@@ -23,7 +23,7 @@ describe('postInSlack', () => {
   it('will post json to slack api', (done) => {
     weatherFor(0, 0, 'Raleigh, NC, US')
       .then((weather) => {
-        postInSlack({}, '#channel', weather);
+        postInSlack({}, '#channel', weather, 'us');
         expect(postMessage.calledOnce).to.be.true;
         expect(postMessage.firstCall.args[0]).to.deep.eq({});
         expect(postMessage.firstCall.args[1]).to.eq('#channel');

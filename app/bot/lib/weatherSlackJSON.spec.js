@@ -14,9 +14,9 @@ describe('weatherSlackJSON', () => {
   it('will return json formatted for a slack message', (done) => {
     weatherFor(0, 0, 'Raleigh, NC, US')
       .then((weather) => {
-        const json = weatherSlackJSON(weather);
+        const json = weatherSlackJSON(weather, 'us');
         expect(json.title).to.eq(`It's ${weather.current.tempString} ${weather.current.description} in ${weather.location}`);
-        expect(json.color).to.eq(colorFor(weather.current.temp_f));
+        expect(json.color).to.eq(colorFor(weather.current.temp_f, 'us'));
         expect(json.title_link).to.eq(weather.current.darkSkyLink);
         expect(json.thumb_url).to.eq(weather.current.icon);
         expect(json.fields[0].title).to.eq('Wind');

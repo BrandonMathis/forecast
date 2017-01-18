@@ -1,9 +1,9 @@
 const colorFor = require('./colorFor');
 
-function forecastSlackJson(forecast) {
+function forecastSlackJson(forecast, units) {
   const high = forecast.high
   const low = forecast.low
-  const color = colorFor((high + low) / 2);
+  const color = colorFor(((high + low) / 2), units);
   let chanceOfRain = '';
   if (forecast.precipProbability > 0) {
     const rainProbabilityPercentage = Math.round(forecast.precipProbability * 100);

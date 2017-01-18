@@ -1,10 +1,10 @@
 const colorFor = require('./colorFor');
 
-function weatherSlackJSON(weather) {
+function weatherSlackJSON(weather, units) {
   return {
     title: `It's ${weather.current.tempString} ${weather.current.description} in ${weather.location}`,
     fallback: `It's ${weather.current.tempString} ${weather.current.description} in ${weather.location}`,
-    color: colorFor(weather.current.temp_f),
+    color: colorFor(weather.current.temp_f, units),
     title_link: weather.current.darkSkyLink,
     thumb_url: weather.current.icon,
     fields: [

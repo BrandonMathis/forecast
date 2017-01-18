@@ -31,7 +31,7 @@ weatherReportSchema.plugin(cronPlugin, {
       })
       .then((weather) => {
         console.log(`Reporting Weather For ${jobInfo.location}`);
-        postInSlack(web, channel, weather);
+        postInSlack(web, channel, weather, units);
       })
       .catch(() => {
         console.log(`Failed to report weather for ${location}. Performed by bot ${bot.id}.`);

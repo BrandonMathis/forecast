@@ -23,7 +23,7 @@ function respondWithWeather(bot, web, location, message) {
       return weatherFor(coords.lat, coords.lng, coords.location, units);
     })
     .then((weather) => {
-      postInSlack(web, channel, weather);
+      postInSlack(web, channel, weather, units);
     })
     .catch(() => {
       postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "@forecast help" if you need help!`, { as_user: true })
