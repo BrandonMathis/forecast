@@ -12,12 +12,24 @@ Bot.find({}, (err, bots) => {
     const bot = bots[start];
     setTimeout(function() {
       console.log(`Starting bot ${bot.slackID}`)
-      activateBot(bot);
+      try {
+        activateBot(bot);
+      } catch(err) {
+        console.log(err);
+      }
     }, 1500 * (start + 1));
   }
 });
 
 WeatherReport.createCron().start();
+
+app.configure(function(){
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+process.on('uncaughtException', (err) => {
+  fs.writeSync(1, `Caught exception: ${err}`);
+});
 
 app.listen(3000, () => {
   console.log("🌤  Forecast is up and running 🌤:");
