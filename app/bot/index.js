@@ -43,7 +43,7 @@ function helpMessage(bot, rtm, message) {
 > \`@forecast ${exampleLocation}\` to get weather for location (try any place in the world)  
 > \`@forecast ${exampleLocation} !us\` to get weather for location in specific units (us or si)  
 *Settings*  
-> \`@forecast set si\` to change units (\`si\` for metric, \`us\` for imperial)  
+> \`@forecast set (si/us)\` to change units (\`si\` for metric, \`us\` for imperial)  
 `, message.channel);
 }
 
