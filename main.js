@@ -23,10 +23,6 @@ Bot.find({}, (err, bots) => {
 
 WeatherReport.createCron().start();
 
-app.configure(function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
-
 process.on('uncaughtException', (err) => {
   fs.writeSync(1, `Caught exception: ${err}`);
 });
