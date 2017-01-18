@@ -9,6 +9,7 @@ mongoose.connect('localhost', 'forecast');
 
 Bot.find({}, (err, bots) => {
   bots.forEach((bot) => {
+    console.log(`Starting bot ${bot.slackID}`);
     activateBot(bot);
   });
 });
