@@ -9,9 +9,7 @@ module.exports = function(token, location, message, units) {
       return getTimeZone(coords.lat, coords.lng)
     })
     .then((timeZone) => {
-      const localTime = moment('8', 'H').tz(timeZone)
-      const utcHour = localTime.utc().format("H");
-      const channel = message.channel;
+      const utcHour = moment.tz("8", "H", "America/New_York").utc().format("H")
       WeatherReport.create({
         token: token,
         channel: message.channel,
