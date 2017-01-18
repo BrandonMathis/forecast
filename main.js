@@ -16,7 +16,7 @@ Bot.find({}, (err, bots) => {
 WeatherReport.createCron().start();
 
 process.on('uncaughtException', (err) => {
-  fs.writeSync(1, `Caught exception: ${err}`);
+  console.log(`Caught exception: ${err}`);
 });
 
 app.listen(3000, () => {
