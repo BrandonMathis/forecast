@@ -8,17 +8,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect('localhost', 'forecast');
 
 Bot.find({}, (err, bots) => {
-  for (var start = 0; start < bots.length; start++) {
-    const bot = bots[start];
-    setTimeout(function() {
-      console.log(`Starting bot ${bot.slackID}`)
-      try {
-        activateBot(bot);
-      } catch(err) {
-        console.log(err);
-      }
-    }, 1500 * (start + 1));
-  }
+  bots.forEach((bot) => {
+    activateBot(bot);
+  });
 });
 
 WeatherReport.createCron().start();
