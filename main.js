@@ -8,9 +8,12 @@ mongoose.Promise = global.Promise;
 mongoose.connect('localhost', 'forecast');
 
 Bot.find({}, (err, bots) => {
-  bots.forEach((bot) => {
-    activateBot(bot);
-  });
+  for (var start = 0; start < bots.length; start++) {
+    const bot = bots[start];
+    setTimeout(function() {
+      activateBot(bot);
+    }, 1500 * (start + 1));
+  }
 });
 
 WeatherReport.createCron().start();
