@@ -90,6 +90,9 @@ app.get('/auth/slack/callback', (req, res) => {
           console.log(err);
           res.redirect('/error');
         });
+    } else {
+      console.log("OAuth error");
+      console.log(response.body);
     }
   });
 });
