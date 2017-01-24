@@ -16,7 +16,7 @@ function respondWithWeather(bot, web, location, message) {
   if (message.text.match(/!([\w]*)/)) {
     units = message.text.match(/!([\w]*)/)[1];
   } else {
-    units = bot.unit || 'us';
+    units = bot.units || 'us';
   }
   getLocation(location)
     .then((coords) => {
