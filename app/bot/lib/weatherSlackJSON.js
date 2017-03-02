@@ -9,6 +9,11 @@ function weatherSlackJSON(weather, units) {
     thumb_url: weather.current.icon,
     fields: [
       {
+        title: 'Low - High',
+        value: `${weather.current.low} - ${weather.current.high}`,
+        short: true
+      },
+      {
         title: 'Wind',
         value: weather.current.windString,
         short: true
@@ -21,11 +26,6 @@ function weatherSlackJSON(weather, units) {
       {
         title: 'Precipitation in next hour',
         value: weather.current.precip1hr,
-        short: true
-      },
-      {
-        title: 'Dewpoint',
-        value: weather.current.dewpointString,
         short: true
       }
     ]

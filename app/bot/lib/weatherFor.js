@@ -48,6 +48,8 @@ function weatherFor(lat, lng, location, units = 'us') {
         feelsLike: `${parseInt(json.currently.apparentTemperature)}° ${degreesUnit}`,
         precip1hr: `${json.currently.precipIntensity} ${precipUnit}`,
         dewpointString: `${parseInt(json.currently.dewPoint)}° ${degreesUnit}`,
+        low: `${parseInt(json.daily.data[0].temperatureMin)}° ${degreesUnit}`,
+        high: `${parseInt(json.daily.data[0].temperatureMax)}° ${degreesUnit}`,
         darkSkyLink: `https://darksky.net/${lat},${lng}`
       };
       const forecast = json.daily.data.slice(1, 4).map((day) => {

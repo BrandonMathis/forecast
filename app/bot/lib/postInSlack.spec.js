@@ -37,6 +37,11 @@ describe('postInSlack', () => {
               "fields": [
                 {
                   "short": true,
+                  "title": "Low - High",
+                  "value": '52° F - 62° F',
+                },
+                {
+                  "short": true,
                   "title": "Wind",
                   "value": "From the N at 9.67 MPH",
                 },
@@ -49,11 +54,6 @@ describe('postInSlack', () => {
                   "short": true,
                   "title": "Precipitation in next hour",
                   "value": "0.5 in",
-                },
-                {
-                  "short": true,
-                  "title": "Dewpoint",
-                  "value": '45° F',
                 }
               ],
               "thumb_url": iconFor('clear-day'),

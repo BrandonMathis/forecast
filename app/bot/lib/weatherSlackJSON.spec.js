@@ -19,17 +19,17 @@ describe('weatherSlackJSON', () => {
         expect(json.color).to.eq(colorFor(weather.current.temp_f, 'us'));
         expect(json.title_link).to.eq(weather.current.darkSkyLink);
         expect(json.thumb_url).to.eq(weather.current.icon);
-        expect(json.fields[0].title).to.eq('Wind');
-        expect(json.fields[0].value).to.eq(weather.current.windString);
+        expect(json.fields[0].title).to.eq('Low - High');
+        expect(json.fields[0].value).to.eq(`${weather.current.low} - ${weather.current.high}`);
         expect(json.fields[0].short).to.eq(true);
-        expect(json.fields[1].title).to.eq('Feels Like');
-        expect(json.fields[1].value).to.eq(weather.current.feelsLike);
+        expect(json.fields[1].title).to.eq('Wind');
+        expect(json.fields[1].value).to.eq(weather.current.windString);
         expect(json.fields[1].short).to.eq(true);
-        expect(json.fields[2].title).to.eq('Precipitation in next hour');
-        expect(json.fields[2].value).to.eq(weather.current.precip1hr);
+        expect(json.fields[2].title).to.eq('Feels Like');
+        expect(json.fields[2].value).to.eq(weather.current.feelsLike);
         expect(json.fields[2].short).to.eq(true);
-        expect(json.fields[3].title).to.eq('Dewpoint');
-        expect(json.fields[3].value).to.eq(weather.current.dewpointString);
+        expect(json.fields[3].title).to.eq('Precipitation in next hour');
+        expect(json.fields[3].value).to.eq(weather.current.precip1hr);
         expect(json.fields[3].short).to.eq(true);
         done();
       })
