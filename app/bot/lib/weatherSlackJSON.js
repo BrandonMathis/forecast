@@ -9,8 +9,8 @@ function weatherSlackJSON(weather, units) {
     thumb_url: weather.current.icon,
     fields: [
       {
-        title: 'Low - High',
-        value: `${weather.current.low} - ${weather.current.high}`,
+        title: 'High - Low',
+        value: `${weather.current.high} - ${weather.current.low}`,
         short: true
       },
       {

@@ -37,8 +37,8 @@ describe('postInSlack', () => {
               "fields": [
                 {
                   "short": true,
-                  "title": "Low - High",
-                  "value": '52° F - 62° F',
+                  "title": "High - Low",
+                  "value": '62° F - 52° F',
                 },
                 {
                   "short": true,

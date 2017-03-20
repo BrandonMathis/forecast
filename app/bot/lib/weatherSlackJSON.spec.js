@@ -19,8 +19,8 @@ describe('weatherSlackJSON', () => {
         expect(json.color).to.eq(colorFor(weather.current.temp_f, 'us'));
         expect(json.title_link).to.eq(weather.current.darkSkyLink);
         expect(json.thumb_url).to.eq(weather.current.icon);
-        expect(json.fields[0].title).to.eq('Low - High');
-        expect(json.fields[0].value).to.eq(`${weather.current.low} - ${weather.current.high}`);
+        expect(json.fields[0].title).to.eq('High - Low');
+        expect(json.fields[0].value).to.eq(`${weather.current.high} - ${weather.current.low}`);
         expect(json.fields[0].short).to.eq(true);
         expect(json.fields[1].title).to.eq('Wind');
         expect(json.fields[1].value).to.eq(weather.current.windString);
