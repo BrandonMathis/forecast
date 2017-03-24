@@ -44,6 +44,7 @@ app.set('view engine', 'pug');
 
 app.use('/icons', express.static('public/icons'))
 app.use('/styles', express.static('public/styles'));
+app.use('/robots.txt', express.static('public/robots.txt'));
 
 app.get('/', (req, res) => {
   res.render('index');
