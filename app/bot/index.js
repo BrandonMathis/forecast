@@ -72,7 +72,7 @@ module.exports = function(bot) {
 
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if(!message.text) { return }
-    const location = message.text.replace(`<@${rtm.activeUserId}>`, '').replace(/![\w]*/, '');
+    const location = message.text.replace(/<@.*>/, '').replace(/![\w]*/, '');
     if (message.user != rtm.activeUserId && message.text && message.text.match(RegExp(rtm.activeUserId))) {
       //
       // @forecast help
