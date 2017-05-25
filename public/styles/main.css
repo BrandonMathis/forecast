@@ -446,6 +446,10 @@ template {
   display: none;
 }
 
+ul {
+  padding-left: 0px;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   background-color: #262a33;
@@ -459,6 +463,14 @@ h1 {
 
 footer {
   margin-top: 20px;
+}
+
+footer .sb svg {
+  fill: white;
+}
+
+footer .sb a {
+  color: white;
 }
 
 footer li {

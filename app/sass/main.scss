@@ -1,5 +1,9 @@
 @import 'normalize';
 
+ul {
+  padding-left: 0px;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
   background-color: #262a33;
@@ -16,6 +20,15 @@ h1 {
 
 footer {
   margin-top: 20px;
+
+  .sb {
+    svg {
+      fill: white;
+    }
+    a {
+      color: white;
+    }
+  }
 
   li {
     margin-top: 5px;
