@@ -87,8 +87,8 @@ module.exports = function(bot) {
       //
       // @forecast schedule <location>
       //
-      } else if(message.text.match(/schedule\s*/)) {
-        scheduleWeatherReport(token, location.replace('schedule', ''), message, bot.units);
+      // } else if(message.text.match(/schedule\s|)}>#)) {
+      //   scheduleWeatherReport(token, location.replace('schedule', ''), message, bot.units);
       //
       // @forecast <Location>
       //

@@ -14,7 +14,7 @@ Bot.find({}, (err, bots) => {
   });
 });
 
-WeatherReport.createCron().start();
+// WeatherReport.createCron().start();
 
 process.on('uncaughtException', (err) => {
   console.log(`Caught exception: ${err}`);
