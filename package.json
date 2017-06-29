@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/BrandonMathis/forecast#readme",
   "dependencies": {
-    "@slack/client": "^3.6.1",
+    "@slack/client": "^3.10.0",
     "babel-eslint": "^7.1.0",
     "chai": "^3.5.0",
     "cron": "^1.1.1",
