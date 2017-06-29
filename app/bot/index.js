@@ -64,6 +64,7 @@ module.exports = function(bot) {
   const web = new WebClient(token);
 
   rtm.on(CLIENT_EVENTS.UNABLE_TO_RTM_START, (message) => {
+    console.log(message);
     if (message === 'invalid_auth' || message == 'account_inactive') {
       console.log(`Removing bot ${bot.slackID} with invalid or inactive token`);
       bot.remove();
