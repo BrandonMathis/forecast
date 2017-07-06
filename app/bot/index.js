@@ -13,6 +13,11 @@ const postMessage = require('./lib/slackWebClient').postMessage;
 function respondWithWeather(bot, web, location, message) {
   const channel = message.channel;
   let units;
+  bot.requests.push({
+    location: location,
+    requested_at: new Date()
+  });
+  bot.save();
   if (message.text.match(/!([\w]*)/)) {
     units = message.text.match(/!([\w]*)/)[1];
   } else {
@@ -85,6 +90,8 @@ module.exports = function(bot) {
   });
 
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
+    bot.teamName = rtmStartData.team.name;
+    bot.save();
     console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}`);
   });
 
