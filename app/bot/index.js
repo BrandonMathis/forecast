@@ -38,13 +38,22 @@ function helpMessage(bot, rtm, message) {
     'Antarctica',
     '90210'
   ]);
-  rtm.sendMessage(`
+  body = `
 *Get Weather*  
 > \`@forecast ${exampleLocation}\` to get weather for location (try any place in the world)  
 > \`@forecast ${exampleLocation} !us\` to get weather for location in specific units (us or si)  
 *Settings*  
 > \`@forecast set (si/us)\` to change units (\`si\` for metric, \`us\` for imperial)  
-`, message.channel);
+`
+  rtm.sendMessage(
+    body,
+    message.channel,
+    function(err, header, statusCode, body) {
+      if (err) {
+        console.log('Error when responding with preferred units:', err);
+      }
+    }
+  );
 }
 
 function setUnits(bot, rtm, message) {
@@ -54,7 +63,11 @@ function setUnits(bot, rtm, message) {
     bot.units = units;
     console.log(`Setting bot units to ${units}`);
     bot.save();
-    rtm.sendMessage(`Your preferred units have been set to *${units}*`, message.channel);
+    rtm.sendMessage(`Your preferred units have been set to *${units}*`, message.channel, function(err, header, statusCode, body) {
+      if (err) {
+        console.log('Error when responding with preferred units:', err);
+      }
+    });
   }
 }
 
@@ -71,8 +84,15 @@ module.exports = function(bot) {
     }
   });
 
+  rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
+    console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}`);
+  });
+
+  rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {});
+
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if(!message.text) { return }
+    if(message.user === rtm.activeUserId) { return }
     const location = message.text.replace(/<@.*>/, '').replace(/![\w]*/, '');
     if (message.user != rtm.activeUserId && message.text && message.text.match(RegExp(rtm.activeUserId))) {
       //
