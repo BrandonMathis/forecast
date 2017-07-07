@@ -31,6 +31,7 @@
     "@slack/client": "^3.10.0",
     "babel-eslint": "^7.1.0",
     "chai": "^3.5.0",
+    "colors": "^1.1.2",
     "cron": "^1.1.1",
     "dotenv": "^2.0.0",
     "eslint": "^3.10.0",
