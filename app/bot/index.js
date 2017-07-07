@@ -92,8 +92,10 @@ module.exports = function(bot) {
   });
 
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
-    bot.teamName = rtmStartData.team.name;
-    bot.save();
+    if (bot.teamName === rtmStartData.team.nmame) {
+      bot.teamName = rtmStartData.team.name;
+      bot.save();
+    }
   });
 
   rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {});
