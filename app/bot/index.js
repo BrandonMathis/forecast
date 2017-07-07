@@ -62,7 +62,9 @@ function helpMessage(bot, rtm, message) {
 }
 
 function setUnits(bot, rtm, message) {
-  let units = message.text.match(/set\s*([\w]*)$/)[1];
+  const setUnitMessage = message.text.match(/set\s*([\w]*)$/)[1];
+  if (!setUnitMessage) { return }
+  let units = setUnitMessage[1];
   units = units.toLowerCase();
   if(_.includes(['si', 'us'], units)) {
     bot.units = units;
