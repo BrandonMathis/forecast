@@ -85,8 +85,8 @@ module.exports = function(bot) {
 
   rtm.on(CLIENT_EVENTS.UNABLE_TO_RTM_START, (message) => {
     console.log(message);
-    if (message === 'invalid_auth' || message == 'account_inactive') {
-      console.log(`Removing bot ${bot.slackID} with invalid or inactive token`);
+    if (message === 'invalid_auth' || message === 'account_inactive') {
+      console.log(`Removing bot from team ${bot.teamName} with invalid or inactive token`);
       bot.remove();
     }
   });
