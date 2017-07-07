@@ -83,22 +83,20 @@ module.exports = function(bot) {
   const rtm = new RtmClient(token, { autoReconnect: false });
   const web = new WebClient(token);
 
-  rtm.on(CLIENT_EVENTS.UNABLE_TO_RTM_START, (message) => {
-    console.log(message);
-    if (message === 'invalid_auth' || message === 'account_inactive') {
-      console.log(`Removing bot from team ${bot.teamName} with invalid or inactive token`);
-      bot.remove();
-    }
-  });
-
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
+    console.log(`Connecting to team ${rtmStartData.team.name}`);
     if (bot.teamName === rtmStartData.team.nmame) {
       bot.teamName = rtmStartData.team.name;
       bot.save();
     }
   });
 
-  rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {});
+  rtm.on(CLIENT_EVENTS.RTM.DISCONNECT, (reason) => {
+    if (reason === 'account_inactive is not recoverable') {
+      console.log(`Removing bot ${bot.teamName} due to account being inactive`);
+      bot.remove();
+    }
+  });
 
   rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if(!message.text) { return }

@@ -22,7 +22,7 @@ html
       .blurb A weather bot for Slack
       .directions
         .step
-          a(href="https://slack.com/oauth/authorize?scope=bot&client_id=" + process.env.SLACK_CLIENT_ID)
+          a(href="https://slack.com/oauth/authorize?scope=bot&client_id=" + process.env.SLACK_CLIENT_ID + "&redirect_uri=" + process.env.REDIRECT_URI)
             .add-to-slack
               img(alt="Add to Slack" height="50" src="/icons/slack_icon.png")
               .text

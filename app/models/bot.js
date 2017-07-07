@@ -5,6 +5,7 @@ const botSchema = new Schema({
   slackID: String,
   teamName: String,
   units: String,
+  accessToken: String,
   requests: {
     type: [
       {
@@ -13,8 +14,7 @@ const botSchema = new Schema({
       }
     ],
     default: []
-  },
-  accessToken: String
+  }
 });
 
 module.exports = mongoose.model('Bot', botSchema);

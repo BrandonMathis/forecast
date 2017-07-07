@@ -71,6 +71,7 @@ app.get('/auth/slack/callback', (req, res) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
       if( json.bot === undefined ) { return res.redirect('/'); }
+      console.log(json);
       const teamId = json.team_id;
       const slackID = json.bot.bot_user_id;
       const accessToken = json.bot.bot_access_token;
