@@ -77,16 +77,24 @@ app.get('/auth/slack/callback', (req, res) => {
       const accessToken = json.bot.bot_access_token;
       Bot.findOne({ slackID })
         .then((existingBot) => {
-          if ( existingBot !== null ) { return res.redirect('/success'); }
-          new Bot({ slackID, accessToken }).save()
-            .then((bot) => {
-              activateBot(bot);
-              res.redirect('/success');
-            })
-            .catch((_err) => {
-              console.log(_err);
-              res.redirect('/error');
-            });
+          if ( existingBot ) {
+            bot.slackID = slackID;
+            bot.accessToken = accessToken;
+            bot.save()
+              .then(() => {
+                return res.redirect('/success');
+              });
+          } else {
+            new Bot({ slackID, accessToken }).save()
+              .then((bot) => {
+                activateBot(bot);
+                res.redirect('/success');
+              })
+              .catch((_err) => {
+                console.log(_err);
+                res.redirect('/error');
+              });
+          }
         })
         .catch((err) => {
           console.log(err);
