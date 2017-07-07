@@ -94,7 +94,6 @@ module.exports = function(bot) {
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
     bot.teamName = rtmStartData.team.name;
     bot.save();
-    console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}`);
   });
 
   rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, function () {});
