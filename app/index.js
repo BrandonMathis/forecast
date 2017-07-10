@@ -64,14 +64,15 @@ app.get('/auth/slack/callback', (req, res) => {
     form: {
       client_id: process.env.SLACK_CLIENT_ID,
       client_secret: process.env.SLACK_CLIENT_SECRET,
+      redirect_uri: process.env.REDIRECT_URI,
       code: req.query.code
     }
   };
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
-      if( json.bot === undefined ) { return res.redirect('/'); }
       console.log(json);
+      if( json.bot === undefined ) { return res.redirect('/'); }
       const teamId = json.team_id;
       const slackID = json.bot.bot_user_id;
       const accessToken = json.bot.bot_access_token;
