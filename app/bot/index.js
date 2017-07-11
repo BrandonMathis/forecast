@@ -63,7 +63,7 @@ function helpMessage(bot, rtm, message) {
 }
 
 function setUnits(bot, rtm, message) {
-  const setUnitMessage = message.text.match(/set\s*([\w]*)$/)[1];
+  const setUnitMessage = message.text.match(/set\s*([\w]*)$/);
   if (!setUnitMessage) { return }
   let units = setUnitMessage[1];
   units = units.toLowerCase();
@@ -93,7 +93,7 @@ module.exports = function(bot) {
   });
 
   rtm.on(CLIENT_EVENTS.RTM.DISCONNECT, (reason) => {
-    if (reason === 'account_inactive is not recoverable') {
+    if (reason === 'account_inactive is not recoverable' || reason === 'invalid_auth is not recoverable') {
       console.log(`Removing bot ${bot.teamName} due to account being inactive`);
       bot.remove();
     }
