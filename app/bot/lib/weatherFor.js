@@ -55,7 +55,7 @@ function weatherFor(lat, lng, location, units = 'us') {
       const forecast = json.daily.data.slice(1, 4).map((day) => {
         const high = parseInt(day.temperatureMax);
         const low = parseInt(day.temperatureMin);
-        const dow = moment(day.time, 'X').format('dddd');
+        const dow = moment(day.time, 'X').tz(json.timezone).format('dddd');
         return {
           text: day.summary,
           title: `${dow} (H: ${high} L: ${low})`,
