@@ -81,7 +81,7 @@ function setUnits(bot, rtm, message) {
 
 module.exports = function(bot) {
   const token = bot.accessToken;
-  const rtm = new RtmClient(token, { autoReconnect: false });
+  const rtm = new RtmClient(token, { autoReconnect: true });
   const web = new WebClient(token);
 
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
