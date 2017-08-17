@@ -93,6 +93,9 @@ module.exports = function(bot) {
   });
 
   rtm.on(CLIENT_EVENTS.RTM.DISCONNECT, (reason) => {
+    console.log(`======ERROR DISCONNECT=======`);
+    console.log(reason);
+    console.log(`=============================`);
     if (reason === 'account_inactive is not recoverable' || reason === 'invalid_auth is not recoverable') {
       console.log(`Removing bot ${bot.teamName} due to account being inactive`);
       bot.remove();
