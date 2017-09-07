@@ -71,7 +71,6 @@ app.get('/auth/slack/callback', (req, res) => {
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
-      console.log(json);
       if( json.bot === undefined ) { return res.redirect('/'); }
       const teamId = json.team_id;
       const slackID = json.bot.bot_user_id;
@@ -79,9 +78,9 @@ app.get('/auth/slack/callback', (req, res) => {
       Bot.findOne({ slackID })
         .then((existingBot) => {
           if ( existingBot ) {
-            bot.slackID = slackID;
-            bot.accessToken = accessToken;
-            bot.save()
+            existingBot.slackID = slackID;
+            existingBot.accessToken = accessToken;
+            existingBot.save()
               .then(() => {
                 return res.redirect('/success');
               });

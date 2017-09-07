@@ -69,7 +69,6 @@ function setUnits(bot, rtm, message) {
   units = units.toLowerCase();
   if(_.includes(['si', 'us'], units)) {
     bot.units = units;
-    console.log(`Setting bot units to ${units}`);
     bot.save();
     rtm.sendMessage(`Your preferred units have been set to *${units}*`, message.channel, function(err, header, statusCode, body) {
       if (err) {
@@ -85,7 +84,7 @@ module.exports = function(bot) {
   const web = new WebClient(token);
 
   rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, (rtmStartData) => {
-    console.log(`Connecting to team ${rtmStartData.team.name}`);
+    // console.log(`Connecting to team ${rtmStartData.team.name}`);
     if (bot.teamName === rtmStartData.team.nmame) {
       bot.teamName = rtmStartData.team.name;
       bot.save();
@@ -98,7 +97,8 @@ module.exports = function(bot) {
     console.log(`=============================`);
     if (reason === 'account_inactive is not recoverable' || reason === 'invalid_auth is not recoverable') {
       console.log(`Removing bot ${bot.teamName} due to account being inactive`);
-      bot.remove();
+      bot.remove()
+      .catch(console.log);
     }
   });
 
