@@ -13,8 +13,7 @@ const colors = require('colors');
 
 function respondWithWeather(bot, web, location, message) {
   const channel = message.channel;
-  let units;
-  bot.requests.push({
+  let units; bot.requests.push({
     location: location,
     requested_at: new Date()
   });
@@ -79,6 +78,7 @@ function setUnits(bot, rtm, message) {
 }
 
 module.exports = function(bot) {
+  return;
   const token = bot.accessToken;
   const rtm = new RtmClient(token, { autoReconnect: true });
   const web = new WebClient(token);

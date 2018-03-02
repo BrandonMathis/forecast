@@ -1,14 +1,24 @@
 require('dotenv').config();
-const activateBot = require('./bot');
+const WebClient = require('@slack/client').WebClient;
 const express = require('express');
 const request = require('request');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const path = require('path');
 const Bot = require('./models/bot');
+const bodyParser = require('body-parser');
+const postInSlack = require('./bot/lib/postInSlack');
+const getLocation = require('./bot/lib/getLocation');
+const postMessage = require('./bot/lib/slackWebClient').postMessage;
+const weatherFor = require('./bot/lib/weatherFor');
+
 const app = express();
 
 app.use(logger('dev'));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 function clientErrorHandler (err, req, res, next) {
   if (req.xhr) {
@@ -59,6 +69,33 @@ app.get('/help', (req, res) => {
   res.render('help');
 });
 
+app.post('/weather', (req, res) => {
+  const message = req.body;
+  const channel = message.channel_id;
+  const location = message.text.replace(/<@.*>/, '').replace(/![\w]*/, '');
+  const units = 'us';
+
+  Bot.find({teamID: message.team_id})
+    .then((bots) => {
+      const bot = bots[0];
+      const web = new WebClient(bot.accessToken);
+      getLocation(location)
+        .then((coords) => {
+          return weatherFor(coords.lat, coords.lng, coords.location, units);
+        })
+        .then((weather) => {
+          postInSlack(web, channel, weather, units);
+        })
+        .catch((err) => {
+          console.log(err);
+          postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "@forecast help" if you need help!`, { as_user: true })
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.get('/auth/slack/callback', (req, res) => {
   const data = {
     form: {
@@ -72,7 +109,7 @@ app.get('/auth/slack/callback', (req, res) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
       if( json.bot === undefined ) { return res.redirect('/'); }
-      const teamId = json.team_id;
+      const teamID = json.team_id;
       const slackID = json.bot.bot_user_id;
       const accessToken = json.bot.bot_access_token;
       Bot.findOne({ slackID })
@@ -80,14 +117,14 @@ app.get('/auth/slack/callback', (req, res) => {
           if ( existingBot ) {
             existingBot.slackID = slackID;
             existingBot.accessToken = accessToken;
+            existingBot.teamID = teamID;
             existingBot.save()
               .then(() => {
                 return res.redirect('/success');
               });
           } else {
-            new Bot({ slackID, accessToken }).save()
+            new Bot({ slackID, teamID, accessToken, bot }).save()
               .then((bot) => {
-                activateBot(bot);
                 res.redirect('/success');
               })
               .catch((_err) => {

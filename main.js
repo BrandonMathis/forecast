@@ -7,12 +7,12 @@ const WeatherReport = require('./app/models/WeatherReport');
 mongoose.Promise = global.Promise;
 mongoose.connect('localhost', 'forecast');
 
-Bot.find({}, (err, bots) => {
-  bots.forEach((bot) => {
-    console.log(`Starting bot ${bot.slackID}`);
-    activateBot(bot);
-  });
-});
+// Bot.find({}, (err, bots) => {
+//   bots.forEach((bot) => {
+//     console.log(`Starting bot ${bot.slackID}`);
+//     activateBot(bot);
+//   });
+// });
 
 // WeatherReport.createCron().start();
 

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Bot = require('./app/models/bot');
+const Bot = require('../app/models/bot');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('localhost', 'forecast');

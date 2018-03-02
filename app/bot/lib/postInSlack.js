@@ -4,7 +4,7 @@ const forecastSlackJSON = require('./forecastSlackJSON');
 const SlackWebClient = require('./slackWebClient');
 
 function postInSlack(web, channel, weather, units) {
-  const footer = { footer: `📍 ${weather.location}. @ me with any location. http://forecastslackbot.com` };
+  const footer = { footer: `📍 ${weather.location}. http://forecastslackbot.com` };
   const body = {
     as_user: true,
     attachments: [

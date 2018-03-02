@@ -4,8 +4,13 @@ const Schema = mongoose.Schema;
 const botSchema = new Schema({
   slackID: String,
   teamName: String,
+  teamID: String,
   units: String,
   accessToken: String,
+  bot: {
+    bot_user_id: String,
+    bot_access_token: String
+  },
   requests: {
     type: [
       {
