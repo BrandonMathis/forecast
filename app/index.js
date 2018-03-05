@@ -126,7 +126,6 @@ app.get('/auth/slack/callback', (req, res) => {
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
-      console.log(json);
       if( json.bot === undefined ) { return res.redirect('/'); }
       const teamID = json.team_id;
       const teamName = json.team_name;
