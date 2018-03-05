@@ -7,10 +7,7 @@ const botSchema = new Schema({
   teamID: String,
   units: String,
   accessToken: String,
-  bot: {
-    bot_user_id: String,
-    bot_access_token: String
-  },
+  teamName: String,
   requests: {
     type: [
       {

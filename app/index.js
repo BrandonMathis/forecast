@@ -83,9 +83,8 @@ app.post('/weather', (req, res) => {
     return;
   }
 
-  Bot.find({ teamID: message.team_id })
-    .then((bots) => {
-      const bot = bots[0];
+  Bot.findOne({ teamID: message.team_id })
+    .then((bot) => {
       const units = bot.units || 'us';
 
       if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
@@ -127,8 +126,10 @@ app.get('/auth/slack/callback', (req, res) => {
   request.post('https://slack.com/api/oauth.access', data, (error, response, body) => {
     if (!error && response.statusCode == 200) {
       const json = JSON.parse(body);
+      console.log(json);
       if( json.bot === undefined ) { return res.redirect('/'); }
       const teamID = json.team_id;
+      const teamName = json.team_name;
       const slackID = json.bot.bot_user_id;
       const accessToken = json.bot.bot_access_token;
       Bot.findOne({ slackID })
@@ -137,12 +138,13 @@ app.get('/auth/slack/callback', (req, res) => {
             existingBot.slackID = slackID;
             existingBot.accessToken = accessToken;
             existingBot.teamID = teamID;
+            existingBot.teamName = teamName;
             existingBot.save()
               .then(() => {
                 return res.redirect('/success');
               });
           } else {
-            new Bot({ slackID, teamID, accessToken, bot }).save()
+            new Bot({ slackID, teamID, accessToken, teamName }).save()
               .then((bot) => {
                 res.redirect('/success');
               })
