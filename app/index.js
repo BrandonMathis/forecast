@@ -75,54 +75,44 @@ app.get('/help', (req, res) => {
 
 app.post('/weather', (req, res) => {
   const message = req.body;
-  const channel = message.channel_id;
   const location = message.text.replace(/<@.*>/, '').replace(/![\w]*/, '');
   const responseURL = message.response_url;
 
-  if (message.text) {
-    Bot.find({teamID: message.team_id})
-      .then((bots) => {
-        const bot = bots[0];
-        const web = new WebClient(bot.accessToken);
-        const units = bot.units || 'us';
-        if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
-          res.status(200).send({ text: sendHelp() });
-        } else if (message.text.match(/set\s*/)) {
-          res.status(200).send({ text: setUnits(bot, message) });
-        } else {
-          res.status(200).send({ text: `Getting weather for ${location}` });
-          getLocation(location)
-            .then((coords) => {
-              return weatherFor(coords.lat, coords.lng, coords.location, units);
-            })
-            .then((weather) => {
-              const json = postInSlack(web, channel, weather, units);
-              var headers = {"Content-type": "application/json"}
-              request({
-                uri: responseURL,
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                json: json
-              }, (error, response, body) => {
-                if (error) {
-                  console.log(error);
-                }
-              });
-            })
-            .catch((err) => {
-              console.log(err);
-              postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "/forecast help" if you need help!`, { as_user: true })
-            });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } else {
+  if (message.token !== process.env.SLACK_VERIFICATION_TOKEN) {
     res.sendStatus(400);
+    return;
   }
+
+  Bot.find({ teamID: message.team_id })
+    .then((bots) => {
+      const bot = bots[0];
+      const units = bot.units || 'us';
+
+      if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
+        res.status(200).send({ text: sendHelp() });
+      } else if (message.text.match(/set\s*/)) {
+        res.status(200).send({ text: setUnits(bot, message) });
+      } else {
+        res.status(200).send({ text: `Getting weather for ${location}` });
+        getLocation(location)
+          .then((coords) => {
+            return weatherFor(coords.lat, coords.lng, coords.location, units);
+          })
+          .then((weather) => {
+            postInSlack(responseURL, weather, units);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(200).send(
+              `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "/forecast help" if you need help!`
+            );
+          });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(400);
+    });
 });
 
 app.get('/auth/slack/callback', (req, res) => {

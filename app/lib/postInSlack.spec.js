@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
 const sinon = require('sinon');
+const request = require('request');
 const postInSlack = require('./postInSlack');
 const weatherFor = require('./weatherFor');
 const iconFor = require('./iconFor');
@@ -8,25 +9,26 @@ const nock = require('nock');
 const mockWeatherFor = require('../../support/mockWeatherFor');
 
 describe('postInSlack', () => {
-  let postMessage;
+  let post;
 
   beforeEach(() => {
     nock.disableNetConnect();
     mockWeatherFor(process.env.WEATHER_TOKEN);
-    postMessage = sinon.stub(SlackWebClient, 'postMessage');
+    post = sinon.stub(request, 'post');
   });
 
   afterEach(() => {
-    postMessage.restore();
+    post.restore();
   });
 
   it('will post json to slack api', (done) => {
     weatherFor(0, 0, 'Raleigh, NC, US')
       .then((weather) => {
-        const json = postInSlack({}, '#channel', weather, 'us');
-        expect(json).to.deep.equal({
-          as_user: true,
+        const responsURL = 'https://example.com/endpoint';
+        const json = postInSlack(responsURL, weather, 'us');
+        expect(post.firstCall.args[0].json).to.deep.equal({
           text: '',
+          as_user: true,
           response_type: 'in_channel',
           attachments: [
             {
