@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const { cronPlugin } = require('mongoose-cron');
 const Schema = mongoose.Schema;
-const getLocation = require('../bot/lib/getLocation');
-const postMessage = require('../bot/lib/slackWebClient').postMessage;
-const postInSlack = require('../bot/lib/postInSlack');
-const weatherFor = require('../bot/lib/weatherFor');
+const getLocation = require('../lib/getLocation');
+const postMessage = require('../lib/slackWebClient').postMessage;
+const postInSlack = require('../lib/postInSlack');
+const weatherFor = require('../lib/weatherFor');
 const WebClient = require('@slack/client').WebClient;
 const Bot = require('./bot.js');
 

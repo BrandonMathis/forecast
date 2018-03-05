@@ -5,7 +5,7 @@ const weatherFor = require('./weatherFor');
 const iconFor = require('./iconFor');
 const SlackWebClient = require('./slackWebClient');
 const nock = require('nock');
-const mockWeatherFor = require('../../../support/mockWeatherFor');
+const mockWeatherFor = require('../../support/mockWeatherFor');
 
 describe('postInSlack', () => {
   let postMessage;
@@ -23,13 +23,11 @@ describe('postInSlack', () => {
   it('will post json to slack api', (done) => {
     weatherFor(0, 0, 'Raleigh, NC, US')
       .then((weather) => {
-        postInSlack({}, '#channel', weather, 'us');
-        expect(postMessage.calledOnce).to.be.true;
-        expect(postMessage.firstCall.args[0]).to.deep.eq({});
-        expect(postMessage.firstCall.args[1]).to.eq('#channel');
-        expect(postMessage.firstCall.args[2]).to.eq('');
-        expect(postMessage.firstCall.args[3]).to.deep.equal({
+        const json = postInSlack({}, '#channel', weather, 'us');
+        expect(json).to.deep.equal({
           as_user: true,
+          text: '',
+          response_type: 'in_channel',
           attachments: [
             {
               "color": "#008B8B",

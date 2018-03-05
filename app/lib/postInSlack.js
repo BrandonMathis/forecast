@@ -3,10 +3,12 @@ const weatherSlackJSON = require('./weatherSlackJSON');
 const forecastSlackJSON = require('./forecastSlackJSON');
 const SlackWebClient = require('./slackWebClient');
 
-function postInSlack(web, channel, weather, units) {
+module.exports = function (web, channel, weather, units) {
   const footer = { footer: `📍 ${weather.location}. http://forecastslackbot.com` };
-  const body = {
+  return {
+    text: '',
     as_user: true,
+    response_type: 'in_channel',
     attachments: [
       weatherSlackJSON(weather, units),
       forecastSlackJSON(weather.forecast[0], units),
@@ -14,9 +16,4 @@ function postInSlack(web, channel, weather, units) {
       Object.assign(forecastSlackJSON(weather.forecast[2], units), footer)
     ]
   };
-  SlackWebClient.postMessage(web, channel, '', body, (err) => {
-    if (err) { console.log(err) } // eslint-disable-line
-  });
 }
-
-module.exports = postInSlack;

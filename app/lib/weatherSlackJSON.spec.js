@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const nock = require('nock');
 const weatherFor = require('./weatherFor');
-const mockWeatherFor = require('../../../support/mockWeatherFor');
+const mockWeatherFor = require('../../support/mockWeatherFor');
 const weatherSlackJSON = require('./weatherSlackJSON');
 const colorFor = require('./colorFor');
 

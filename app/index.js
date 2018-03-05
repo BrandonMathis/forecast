@@ -5,12 +5,16 @@ const request = require('request');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 const path = require('path');
+const { IncomingWebhook } = require('@slack/client');
 const Bot = require('./models/bot');
 const bodyParser = require('body-parser');
-const postInSlack = require('./bot/lib/postInSlack');
-const getLocation = require('./bot/lib/getLocation');
-const postMessage = require('./bot/lib/slackWebClient').postMessage;
-const weatherFor = require('./bot/lib/weatherFor');
+const postInSlack = require('./lib/postInSlack');
+const getLocation = require('./lib/getLocation');
+const postMessage = require('./lib/slackWebClient').postMessage;
+const weatherFor = require('./lib/weatherFor');
+const sendHelp = require('./lib/sendHelp');
+const SlackWebClient = require('./lib/slackWebClient');
+const setUnits = require('./lib/setUnits');
 
 const app = express();
 
@@ -73,27 +77,52 @@ app.post('/weather', (req, res) => {
   const message = req.body;
   const channel = message.channel_id;
   const location = message.text.replace(/<@.*>/, '').replace(/![\w]*/, '');
-  const units = 'us';
+  const responseURL = message.response_url;
 
-  Bot.find({teamID: message.team_id})
-    .then((bots) => {
-      const bot = bots[0];
-      const web = new WebClient(bot.accessToken);
-      getLocation(location)
-        .then((coords) => {
-          return weatherFor(coords.lat, coords.lng, coords.location, units);
-        })
-        .then((weather) => {
-          postInSlack(web, channel, weather, units);
-        })
-        .catch((err) => {
-          console.log(err);
-          postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "@forecast help" if you need help!`, { as_user: true })
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (message.text) {
+    Bot.find({teamID: message.team_id})
+      .then((bots) => {
+        const bot = bots[0];
+        const web = new WebClient(bot.accessToken);
+        const units = bot.units || 'us';
+        if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
+          res.status(200).send({ text: sendHelp() });
+        } else if (message.text.match(/set\s*/)) {
+          res.status(200).send({ text: setUnits(bot, message) });
+        } else {
+          res.status(200).send({ text: `Getting weather for ${location}` });
+          getLocation(location)
+            .then((coords) => {
+              return weatherFor(coords.lat, coords.lng, coords.location, units);
+            })
+            .then((weather) => {
+              const json = postInSlack(web, channel, weather, units);
+              var headers = {"Content-type": "application/json"}
+              request({
+                uri: responseURL,
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                json: json
+              }, (error, response, body) => {
+                if (error) {
+                  console.log(error);
+                }
+              });
+            })
+            .catch((err) => {
+              console.log(err);
+              postMessage(web, channel, `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "/forecast help" if you need help!`, { as_user: true })
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 app.get('/auth/slack/callback', (req, res) => {

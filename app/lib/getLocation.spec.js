@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const getLocation = require('./getLocation');
 const nock = require('nock');
-const mockGoogleMaps = require('../../../support/mockGoogleMaps');
+const mockGoogleMaps = require('../../support/mockGoogleMaps');
 
 describe('getLocation', () => {
   beforeEach(() => {

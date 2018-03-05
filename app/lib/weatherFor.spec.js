@@ -2,8 +2,8 @@ require('dotenv').config();
 const expect = require('chai').expect
 const weatherFor = require('./weatherFor');
 const nock = require('nock');
-const mockWeatherFor = require('../../../support/mockWeatherFor');
-const mockBadWeatherFor = require('../../../support/mockBadWeatherFor');
+const mockWeatherFor = require('../../support/mockWeatherFor');
+const mockBadWeatherFor = require('../../support/mockBadWeatherFor');
 const iconFor = require('./iconFor');
 
 describe('weatherFor', () => {
