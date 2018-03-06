@@ -103,7 +103,7 @@ app.post('/weather', (req, res) => {
           .catch((err) => {
             console.log(err);
             res.status(200).send(
-              `Sorry, I could not find that location. Can you be more specific?\n\n Just type "/forecast help" if you need help!`
+              `Sorry, I could not find any location called ${location}. Can you be more specific?\n\n Just type "/forecast help" if you need help!`
             );
           });
       }
