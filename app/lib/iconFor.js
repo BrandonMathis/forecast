@@ -14,5 +14,5 @@ module.exports = function(description) {
     'tornado': 'tstorms',
     'hail': 'sleet'
   }[description] || 'unknown'
-  return `http://forecastslackbot.com/icons/black/png/128x128/${description}.png`
+  return `http://forecastslackbot.com/icons/black/png/64x64/${description}.png`
 }
