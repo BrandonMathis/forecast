@@ -1,6 +1,7 @@
 const request = require('request');
 
 function getLocation(location) {
+  const location = location;
   this.url = 'http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=' + encodeURIComponent(location);
   return new Promise((resolve, reject) => {
     request(url, (err, res, body) => {
