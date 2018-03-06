@@ -92,9 +92,9 @@ app.post('/weather', (req, res) => {
       } else if (message.text.match(/set\s*/)) {
         res.status(200).send({ text: setUnits(bot, message) });
       } else {
-        res.status(200).send({ text: `Getting weather for ${location}` });
         getLocation(location)
           .then((coords) => {
+            res.status(200).send({ text: `Getting weather for ${location}` });
             return weatherFor(coords.lat, coords.lng, coords.location, units);
           })
           .then((weather) => {
