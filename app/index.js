@@ -132,7 +132,7 @@ app.get('/auth/slack/callback', (req, res) => {
       Bot.findOne({ teamID })
         .then((existingBot) => {
           if ( existingBot ) {
-            existingBot.teamID = slackID;
+            existingBot.teamID = teamID;
             existingBot.accessToken = accessToken;
             existingBot.teamName = teamName;
             existingBot.save()
