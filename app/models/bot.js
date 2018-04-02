@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
+const timestamps = require('mongoose-timestamp');
 const Schema = mongoose.Schema;
-
 const botSchema = new Schema({
   slackID: String,
   teamName: String,
@@ -19,4 +19,5 @@ const botSchema = new Schema({
   }
 });
 
+botSchema.plugin(timestamps);
 module.exports = mongoose.model('Bot', botSchema);
