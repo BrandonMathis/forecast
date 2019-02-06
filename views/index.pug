@@ -20,7 +20,7 @@ html
       .blurb A weather bot for Slack
       .directions
         .step
-          a(href="https://slack.com/oauth/authorize?scope=commands&client_id=" + process.env.SLACK_CLIENT_ID + "&redirect_uri=" + process.env.REDIRECT_URI)
+          a(id="install-app" href="https://slack.com/oauth/authorize?scope=commands&client_id=" + process.env.SLACK_CLIENT_ID + "&redirect_uri=" + process.env.REDIRECT_URI)
             .add-to-slack
               img(alt="Add to Slack" height="50" src="/icons/slack_icon.png")
               .text
@@ -48,3 +48,11 @@ html
           li
             a(href="/help")
               | Need Help?
+    script.
+      document.getElementById('install-app').addEventListener('click', function() {
+        gtag('event', 'install-app', {
+          event_category: 'app',
+          event_label: 'action',
+          value: 'installed'
+        });
+      });
