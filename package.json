@@ -53,6 +53,7 @@
     "pug": "^2.0.0-beta6",
     "request": "^2.78.0",
     "sinon": "^1.17.6",
-    "slackbots": "^0.5.3"
+    "slackbots": "^0.5.3",
+    "universal-analytics": "^0.4.20"
   }
 }

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const ua = require('universal-analytics');
 const WebClient = require('@slack/client').WebClient;
 const express = require('express');
 const request = require('request');
@@ -82,6 +83,9 @@ app.post('/weather', (req, res) => {
     res.sendStatus(400);
     return;
   }
+
+  const visitor = ua('UA-XXXX-XX', { uid: message.team_id });
+  visitor.pageview('/weather').send();
 
   Bot.findOne({ teamID: message.team_id })
     .then((bot) => {
