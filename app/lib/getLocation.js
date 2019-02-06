@@ -11,7 +11,8 @@ function getLocation(location) {
       const lat = json.results[0].geometry.location.lat;
       const lng = json.results[0].geometry.location.lng;
       const formattedAddress = json.results[0].formatted_address;
-      resolve({ lat, lng, formattedAddress });
+      console.log(formattedAddress);
+      resolve({ lat, lng, location });
     });
   });
 }
