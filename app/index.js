@@ -88,6 +88,7 @@ app.post('/weather', (req, res) => {
   const out = visitor.pageview('/weather', function(err) {
     console.log(err);
   }).send();
+  console.log('PAGEVIEW');
   console.log(out);
 
   Bot.findOne({ teamID: message.team_id })
