@@ -84,7 +84,7 @@ app.post('/weather', (req, res) => {
     return;
   }
 
-  console.log(team_id);
+  console.log(message.team_id);
   const visitor = ua(process.env.GA_ID, { uid: message.team_id });
   visitor.pageview('/weather', function(err) {
     if (err) { console.log(err); } // eslint-disable-line
