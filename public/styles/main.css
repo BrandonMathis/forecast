@@ -492,6 +492,11 @@ footer li {
   font-size: 30px;
 }
 
+.add-response .add-response--success {
+  margin: 40px 0;
+  font-size: 80px;
+}
+
 .blurb {
   font-size: 20px;
   margin-top: 20px;

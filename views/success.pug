@@ -10,5 +10,30 @@ html
         include ../public/icons/white/svg/partlycloudy.svg
       .add-response
         h2.add-response--header 👍🏼
+        h3.add-response--success Success!
         p.add-response--blurb
-          | Just @forecast to invite the forecast bot into your Slack channel!
+          | Just use the /forecast command to get started!
+        .directions
+          .line
+            include ../public/icons/line.svg
+          .step
+            .screenshot
+              img(src="/icons/message.png").slack
+          .line
+            include ../public/icons/line.svg
+          .step
+            .screenshot
+              img(src="/icons/response.png").slack
+      footer
+        .sb
+          a(href="https://brandonmathis.me")
+            br
+            | Created By Brandon Mathis
+        ul
+          li
+            | &nbsp;
+            a(href="https://darksky.net/poweredby/")
+              | Powered by DarkSky 
+          li
+            a(href="/help")
+              | Need Help?
