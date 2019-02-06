@@ -1,7 +1,7 @@
 const request = require('request');
 
 function getLocation(givenLocation) {
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=${encodeURIComponent(location)}&key=${process.env.GOOGLE_MAPS_KEY}`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=${encodeURIComponent(givenLocation)}&key=${process.env.GOOGLE_MAPS_KEY}`;
   return new Promise((resolve, reject) => {
     request(url, (err, res, body) => {
       if (err) { console.log(err); } // eslint-disable-line no-console
