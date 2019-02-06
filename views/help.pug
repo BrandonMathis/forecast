@@ -4,6 +4,12 @@ html
     title Forecast Slack Bot
     link(rel="stylesheet" href="/styles/main.css" type="text/css")
     link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,300")
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-133915372-1")
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-133915372-1');
   body
     .container.container--center
       a(href="/").logo
@@ -17,3 +23,16 @@ html
           a(href='https://twitter.com/brandonmathis')
             | Brandon
           | .
+      footer
+        .sb
+          a(href="https://brandonmathis.me")
+            br
+            | Created By Brandon Mathis
+        ul
+          li
+            | &nbsp;
+            a(href="https://darksky.net/poweredby/")
+              | Powered by DarkSky 
+          li
+            a(href="/help")
+              | Need Help?
