@@ -85,7 +85,7 @@ app.post('/weather', (req, res) => {
   }
 
   console.log(message.team_id);
-  const visitor = ua(process.env.GA_ID, { uid: message.team_id });
+  const visitor = ua(process.env.GA_ID, 'FORECAST_SLACK_BOT', { strictCidFormat: false });
   visitor.pageview('/weather', function(err) {
     if (err) { console.log(err); } // eslint-disable-line
   }).send();
@@ -93,6 +93,7 @@ app.post('/weather', (req, res) => {
   Bot.findOne({ teamID: message.team_id })
     .then((bot) => {
       const units = bot.units || 'us';
+      console.log(bot);
 
       if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
         res.status(200).send({ text: sendHelp() });
