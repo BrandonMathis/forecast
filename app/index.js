@@ -85,11 +85,9 @@ app.post('/weather', (req, res) => {
   }
 
   const visitor = ua(process.env.GA_ID, { uid: message.team_id });
-  const out = visitor.pageview('/weather', function(err) {
-    console.log(err);
+  visitor.pageview('/weather', function(err) {
+    if (err) { console.log(err); } // eslint-disable-line
   }).send();
-  console.log('PAGEVIEW');
-  console.log(out);
 
   Bot.findOne({ teamID: message.team_id })
     .then((bot) => {
