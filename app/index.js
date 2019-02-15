@@ -90,9 +90,9 @@ app.post('/weather', (req, res) => {
       console.log(bot.teamName);
       console.log(bot.teamID);
       const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
-      visitor.pageview(`/weather?q=${encodeURIComponent(message)}`, function(err) {
+      visitor.pageview(`/weather?q=${encodeURIComponent(message.location)}`, function(err) {
         if (err) { console.log(err); } // eslint-disable-line
-      }).send();
+      }).event('Get Weather', location).send();
 
       const units = bot.units || 'us';
 
