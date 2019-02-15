@@ -91,6 +91,8 @@ app.post('/weather', (req, res) => {
       console.log(bot.teamID);
       const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
 
+      visitor.event('Weather Requested', location);
+
       const units = bot.units || 'us';
 
       if (message.text.match(/help\s*$/) || location.match(/^(?![\s\S])/)) {
