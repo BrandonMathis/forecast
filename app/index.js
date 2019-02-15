@@ -90,9 +90,6 @@ app.post('/weather', (req, res) => {
       console.log(bot.teamName);
       console.log(bot.teamID);
       const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
-      visitor.pageview(`/weather`, function(err) {
-        if (err) { console.log(err); } // eslint-disable-line
-      }).event('Get Weather', location).send();
 
       const units = bot.units || 'us';
 
@@ -104,6 +101,11 @@ app.post('/weather', (req, res) => {
         getLocation(location)
           .then((coords) => {
             res.status(200).send({ text: `Getting weather for ${location}` });
+
+            visitor.pageview('/weather', function(err) {
+              if (err) { console.log(err); } // eslint-disable-line
+            }).event('Get Weather', location).send();
+
             return weatherFor(coords.lat, coords.lng, coords.location, units);
           })
           .then((weather) => {
