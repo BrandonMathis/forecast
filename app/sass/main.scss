@@ -131,6 +131,13 @@ a {
   }
 }
 
+.step {
+  .note {
+    padding-top: 1em;
+    opacity: 0.5;
+  }
+}
+
 @media (max-width: 1028px) {
   .container {
     margin: 0;
