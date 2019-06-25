@@ -104,7 +104,7 @@ app.post('/weather', (req, res) => {
 
             visitor.pageview('/weather', function(err) {
               if (err) { console.log(err); } // eslint-disable-line
-            }).event('Get Weather', bot.teamName, coords.location).send();
+            }).event('Get Weather', coords.location).send();
 
             return weatherFor(coords.lat, coords.lng, coords.location, units);
           })
