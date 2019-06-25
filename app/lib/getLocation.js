@@ -10,7 +10,8 @@ function getLocation(givenLocation) {
       const lat = json.results[0].geometry.location.lat;
       const lng = json.results[0].geometry.location.lng;
       const location = json.results[0].formatted_address;
-      resolve({ lat, lng, location });
+      const placeID = json.results[0].placeID;
+      resolve({ lat, lng, location, placeID });
     });
   });
 }

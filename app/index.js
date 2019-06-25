@@ -87,8 +87,6 @@ app.post('/weather', (req, res) => {
 
   Bot.findOne({ teamID: message.team_id })
     .then((bot) => {
-      console.log(bot.teamName);
-      console.log(bot.teamID);
       const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
 
       visitor.event('Weather Requested', location);
