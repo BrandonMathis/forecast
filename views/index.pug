@@ -55,11 +55,3 @@ html
           li
             a(href="/help")
               | Need Help?
-    script.
-      document.getElementById('install-app').addEventListener('click', function() {
-        gtag('event', 'install-app', {
-          event_category: 'app',
-          event_label: 'action',
-          value: 'installed'
-        });
-      });

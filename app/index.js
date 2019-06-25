@@ -89,7 +89,7 @@ app.post('/weather', (req, res) => {
     .then((bot) => {
       const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
 
-      visitor.event('Weather Requested', location);
+      visitor.event('Weather Requested', location).send();
 
       const units = bot.units || 'us';
 
@@ -102,9 +102,7 @@ app.post('/weather', (req, res) => {
           .then((coords) => {
             res.status(200).send({ text: `Getting weather for ${location}` });
 
-            visitor.pageview('/weather', function(err) {
-              if (err) { console.log(err); } // eslint-disable-line
-            }).event('Get Weather', coords.location).send();
+            visitor.pageview({ dp: '/forecast', dt: coords.location, geoid: coords.location }).send();
 
             return weatherFor(coords.lat, coords.lng, coords.location, units);
           })
@@ -153,6 +151,8 @@ app.get('/auth/slack/callback', (req, res) => {
           } else {
             new Bot({ teamID, accessToken, teamName }).save()
               .then((bot) => {
+                const visitor = ua(process.env.GA_ID, bot.teamName, { strictCidFormat: false, uid: bot.teamID });
+                visitor.event('app', 'install-app', 'success').send();
                 res.redirect('/success');
               })
               .catch((_err) => {
