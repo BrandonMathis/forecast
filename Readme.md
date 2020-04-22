@@ -19,4 +19,3 @@ npm install
 ```
 npm start
 ```
-
