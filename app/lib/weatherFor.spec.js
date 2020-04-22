@@ -1,4 +1,3 @@
-require('dotenv').config();
 const expect = require('chai').expect
 const weatherFor = require('./weatherFor');
 const nock = require('nock');
