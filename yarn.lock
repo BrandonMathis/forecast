@@ -1036,10 +1036,6 @@ extend@3, extend@~3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
 
-extend@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-2.0.1.tgz#1ee8010689e7395ff9448241c98652bc759a8260"
-
 extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
@@ -2463,10 +2459,6 @@ oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.9.0.tgz#47a7b016baa68b5fa0ecf3dee08a85c679ac6455"
 
-oauth@0.9.x:
-  version "0.9.15"
-  resolved "https://registry.yarnpkg.com/oauth/-/oauth-0.9.15.tgz#bd1fefaf686c96b75475aed5196412ff60cfb9c1"
-
 object-assign@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
@@ -2577,28 +2569,6 @@ parseurl@~1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.1.tgz#c8ab8c9223ba34888aa64a297b28853bec18da56"
 
-passport-oauth@~0.1.1:
-  version "0.1.15"
-  resolved "https://registry.yarnpkg.com/passport-oauth/-/passport-oauth-0.1.15.tgz#fb74e0afe84614bfa256c5fc716cc56bbfc8cec0"
-  dependencies:
-    oauth "0.9.x"
-    passport "~0.1.1"
-    pkginfo "0.2.x"
-
-passport-slack@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/passport-slack/-/passport-slack-0.0.6.tgz#78ab5ce77754cd669d572fc37b703fa026c28864"
-  dependencies:
-    passport-oauth "~0.1.1"
-    pkginfo "0.2.x"
-
-passport@~0.1.1:
-  version "0.1.18"
-  resolved "https://registry.yarnpkg.com/passport/-/passport-0.1.18.tgz#c8264479dcb6414cadbb66752d12b37e0b6525a1"
-  dependencies:
-    pause "0.0.1"
-    pkginfo "0.2.x"
-
 path-exists@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/path-exists/-/path-exists-2.1.0.tgz#0feb6c64f0fc518d9a754dd5efb62c7022761f4b"
@@ -2635,10 +2605,6 @@ pause-stream@0.0.11:
   dependencies:
     through "~2.3"
 
-pause@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/pause/-/pause-0.0.1.tgz#1d408b3fdb76923b9543d96fb4c9dfd535d9cb5d"
-
 performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
@@ -2660,10 +2626,6 @@ pinkie-promise@^2.0.0:
 pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
-
-pkginfo@0.2.x:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.2.3.tgz#7239c42a5ef6c30b8f328439d9b9ff71042490f8"
 
 pkginfo@^0.4.0:
   version "0.4.0"
@@ -2999,7 +2961,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@2, request@^2.56.0, request@^2.64.0, request@^2.78.0, request@^2.79.0, request@^2.81.0:
+request@2, request@^2.64.0, request@^2.78.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -3221,15 +3183,6 @@ sinon@^1.17.6:
     lolex "1.3.2"
     samsam "1.1.2"
     util ">=0.10.3 <1"
-
-slackbots@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/slackbots/-/slackbots-0.5.3.tgz#7e98f9a02a7ab1e627c00b7f5a37d0cc7478410f"
-  dependencies:
-    extend "^2.0.1"
-    request "^2.56.0"
-    vow "^0.4.9"
-    ws "^1.0.1"
 
 slice-ansi@0.0.4:
   version "0.0.4"
@@ -3637,10 +3590,6 @@ verror@1.3.6:
 void-elements@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
-
-vow@^0.4.9:
-  version "0.4.16"
-  resolved "https://registry.yarnpkg.com/vow/-/vow-0.4.16.tgz#bb9d54d938d5f80520d658a740e7a895e30feeeb"
 
 which-module@^1.0.0:
   version "1.0.0"
