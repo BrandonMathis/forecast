@@ -1,12 +1,14 @@
 const expect = require('chai').expect;
 const getLocation = require('./getLocation');
 const nock = require('nock');
-const mockGoogleMaps = require('../../support/mockGoogleMaps');
 
 describe('getLocation', () => {
   beforeEach(() => {
     nock.disableNetConnect();
-    mockGoogleMaps();
+    const body = require('../../support/maps.json');
+    nock('https://maps.googleapis.com:443')
+      .get(`/maps/api/geocode/json?sensor=false&address=Raleigh%20NC&key=${process.env.GOOGLE_MAPS_KEY}`)
+      .reply(200, body);
   });
 
   it('resolves a promise with lat and lng', (done) => {
