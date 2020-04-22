@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/BrandonMathis/forecast.svg?style=svg)](https://circleci.com/gh/BrandonMathis/forecast)
+
 # Forecast
 <img src="https://raw.githubusercontent.com/BrandonMathis/forecast/master/public/icons/forecast_github_logo.png"/>  
 🌤 A weather bot for Slack 🌤
