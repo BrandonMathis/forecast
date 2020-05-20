@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    base(target="_blank")
+    title Forecast Slack Bot
+    link(rel="stylesheet" href="/styles/main.css" type="text/css")
+    link(rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Ubuntu:400,300")
+    script(async src="https://www.googletagmanager.com/gtag/js?id=UA-133915372-1")
+    script(async src="https://unpkg.com/showdown/dist/showdown.min.js")
+    script.
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-133915372-1');
+  body
+    .container.container--center
+      a(href="/" target="_self")
+        .logo(style="padding-bottom: 3em")
+          include ../public/icons/white/svg/partlycloudy.svg
+      .content(style="position: relative;")
+        a(href="https://covermymeds.slack.com/apps/A9JTVFNCX-forecast")
+          div(style="position: absolute; top: -0.5em; left: -0.5em; height: 70px; width: 70px;")
+            include ./slack.svg
+        include:markdown-it changing.md

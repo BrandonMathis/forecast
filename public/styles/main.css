@@ -596,3 +596,41 @@ a {
     font-size: 50px;
   }
 }
+
+.content {
+  max-width: 780px;
+  margin: 0 auto;
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.content svg path {
+  fill: #353A46;
+  transition: fill 0.5s ease;
+}
+
+.content svg:hover path {
+  fill: white;
+  transition: fill 0.5s ease;
+}
+
+.content a {
+  color: white;
+  text-decoration: underline;
+}
+
+.content h1 {
+  font-size: 3em;
+}
+
+.content h2 {
+  margin: 0.5em 0;
+}
+
+.content blockquote {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  padding: 0.5em;
+  background: #353a46;
+  font-size: 1.2em;
+}

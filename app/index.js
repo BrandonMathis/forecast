@@ -73,6 +73,9 @@ app.get('/error', (req, res) => {
 app.get('/help', (req, res) => {
   res.render('help');
 });
+app.get('/is-changing', (req, res) => {
+  res.render('is-changing');
+});
 
 app.post('/weather', (req, res) => {
   const message = req.body;
