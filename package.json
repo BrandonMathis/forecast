@@ -34,7 +34,7 @@
     "dotenv": "^2.0.0",
     "express": "^4.14.0",
     "jstransformer-markdown-it": "1.0.0",
-    "lodash": "^4.17.13",
+    "lodash": "^4.17.19",
     "moment-timezone": "^0.5.11",
     "mongoose": "^4.6.7",
     "mongoose-cron": "^0.5.7",
