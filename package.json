@@ -40,7 +40,7 @@
     "mongoose-cron": "^0.5.7",
     "mongoose-timestamp": "^0.6.0",
     "morgan": "^1.9.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "node-sass-middleware": "^0.10.0",
     "node-time": "^0.1.0",
     "nodemon": "^1.11.0",
