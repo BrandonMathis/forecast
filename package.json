@@ -44,7 +44,7 @@
     "node-sass-middleware": "^0.10.0",
     "node-time": "^0.1.0",
     "nodemon": "^1.11.0",
-    "pug": "^2.0.0-beta6",
+    "pug": "^3.0.1",
     "request": "^2.78.0",
     "universal-analytics": "^0.4.20"
   },
